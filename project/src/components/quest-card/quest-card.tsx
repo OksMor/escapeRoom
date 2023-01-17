@@ -1,4 +1,12 @@
-function QuestCard(): JSX.Element {
+import { Quest } from '../../types/types';
+
+type QuestCardProps = {
+  quest: Quest;
+}
+
+function QuestCard(props: QuestCardProps): JSX.Element {
+  const { quest } = props;
+
   return (
     <div className="quest-card">
       <div className="quest-card__img">
@@ -9,7 +17,7 @@ function QuestCard(): JSX.Element {
 
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <a className="quest-card__link" href="quest.html">Марс-2056</a>
+          <a className="quest-card__link" href="quest.html">{quest.title}</a>
         </div>
         {/* <div class="quest-card__info-wrapper"><a class="quest-card__link" href="quest.html">Маньяк</a><span class="quest-card__info">[сегодня,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br>м. Петроградская]</span> */}
 
@@ -17,12 +25,12 @@ function QuestCard(): JSX.Element {
           <li className="tags__item">
             <svg width="11" height="14" aria-hidden="true">
               <use xlinkHref="#icon-person"></use>
-            </svg>2&ndash;4&nbsp;чел
+            </svg>{quest.peopleMinMax[0]}&ndash;{quest.peopleMinMax[1]}&nbsp;чел
           </li>
           <li className="tags__item">
             <svg width="14" height="14" aria-hidden="true">
               <use xlinkHref="#icon-level"></use>
-            </svg>Лёгкий
+            </svg>{quest.level}Лёгкий
           </li>
         </ul>
         <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>

@@ -1,10 +1,43 @@
+import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
+
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+// import { AuthorizationStatus } from '../../const';
+
+import { fetchQuestsAction} from '../../store/api-actions';
+
+import { getIsQuestsLoading } from '../../store/quests-process/selector';
+// import { getAuthorizationStatus } from '../../store/user-process/selector';
+import { getFilteredQuests } from '../../store/app-process/selector';
+
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import QuestCard from '../../components/quest-card/quest-card';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+import QuestsList from '../../components/quests-list/quests-list';
 
 function MainScreen(): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
+  // const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  const quests = useAppSelector(getFilteredQuests);
+  const isQuestsLoading = useAppSelector(getIsQuestsLoading);
+
+
+  useEffect(() => {
+    // dispatch(fetchPromoFilmAction());
+    dispatch(fetchQuestsAction());
+    // if (authorizationStatus === AuthorizationStatus.Auth) {
+    //   dispatch(fetchFavoritesFilmsAction());
+    // }
+  }, [dispatch]);
+
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>WTW. What to Watch</title>
+      </Helmet>
       <Header/>
       <main className="page-content">
         <div className="container">
@@ -102,11 +135,8 @@ function MainScreen(): JSX.Element {
 
           <h2 className="title visually-hidden">Выберите квест</h2>
 
-          <div className="cards-grid">
+          {isQuestsLoading ? <LoadingScreen/> : <QuestsList quests={quests} />}
 
-            <QuestCard/>
-
-          </div>
         </div>
       </main>
 

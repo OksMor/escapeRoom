@@ -1,8 +1,16 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import QuestCard from '../../components/quest-card/quest-card';
+import QuestsList from '../../components/quests-list/quests-list';
+import { useAppSelector } from '../../hooks/hooks';
+import { getIsQuestsLoading } from '../../store/quests-process/selector';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { getFilteredQuests } from '../../store/app-process/selector';
 
 function MyQuestsScreen(): JSX.Element {
+
+  const isQuestsLoading = useAppSelector(getIsQuestsLoading);
+  const quests = useAppSelector(getFilteredQuests);
+
   return (
     <div className="wrapper">
       <Header/>
@@ -16,9 +24,7 @@ function MyQuestsScreen(): JSX.Element {
           <div className="page-content__title-wrapper">
             <h1 className="title title--size-m page-content__title">Мои бронирования</h1>
           </div>
-          <div className="cards-grid">
-            <QuestCard/>
-          </div>
+          {isQuestsLoading ? <LoadingScreen/> : <QuestsList quests={quests} />}
         </div>
       </main>
     <Footer/>
