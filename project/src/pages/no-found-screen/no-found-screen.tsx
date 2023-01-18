@@ -9,7 +9,7 @@ function NotFoundScreen(): JSX.Element {
   return (
     <div className="user-page">
       <Helmet>
-        <title>WTW. Page not found</title>
+        <title>EscapeRoom. Page not found</title>
       </Helmet>
       <header className="page-header user-page__head">
 

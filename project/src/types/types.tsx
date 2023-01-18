@@ -1,4 +1,4 @@
-import { QuestType, QuestLevel } from "../const"
+import { QuestType, QuestLevel } from '../const';
 
 type Quest = {
   id: number;
@@ -6,7 +6,7 @@ type Quest = {
   previewImg: string;
   previewImgWebp: string;
   level: QuestType; //enum --- easy┃medium┃hard Allowed
-  type: QuestLevel;  //enum --- adventures┃horror┃mystic┃detective┃sci-fi Allowed
+  type: QuestLevel; //enum --- adventures┃horror┃mystic┃detective┃sci-fi Allowed
   peopleMinMax: [number, number];
 
   description: string;
@@ -15,21 +15,21 @@ type Quest = {
 }
 
 type Booking = {//-----------------------------------------------------------не исп
-  id: number
+  id: number;
   locations: [{
-    id: number
-    address: string
-    coords: [number]//    Ключ coords представлен массивом из двух значений. Например, [59.968322, 30.317359].
-  }]
+    id: number;
+    address: string;
+    coords: [number]; //Ключ coords представлен массивом из двух значений. Например, [59.968322, 30.317359].
+  }];
   slots: {
     today: [{
-    time: string
-    isAvailable: boolean
-    }]
+    time: string;
+    isAvailable: boolean;
+  }];
     tomorrow: [{
-    time: string
-    isAvailable: boolean
-    }]}
+    time: string;
+    isAvailable: boolean;
+  }];};
 }
 
 type NewBooking = { //-----------------------------------------------------------не исп

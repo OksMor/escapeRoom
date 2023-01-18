@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
-import { DIFFICULTY, TYPE } from '../../const';
+import { AppRoute, DIFFICULTY, TYPE } from '../../const';
 
 import { fetchCurrentQuestAction } from '../../store/api-actions';
 import { getCurrentQuest, getIsCurrentQuestLoading } from '../../store/current-quest-process/selector';
@@ -77,7 +77,7 @@ function QuestScreen(): JSX.Element {
               </li>
             </ul>
             <p className="quest-page__description">{quest.description}</p>
-            <a className="btn btn--accent btn--cta quest-page__btn" href="booking.html">Забронировать</a>
+            <Link className="btn btn--accent btn--cta quest-page__btn" to={AppRoute.SignIn}>Забронировать</Link>
           </div>
         </div>
       </main>

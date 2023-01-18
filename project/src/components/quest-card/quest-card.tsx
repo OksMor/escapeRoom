@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Quest } from '../../types/types';
 import { AppRoute, DIFFICULTY } from '../../const';
@@ -23,7 +23,7 @@ function QuestCard(props: QuestCardProps): JSX.Element {
 
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <a className="quest-card__link" href={`${AppRoute.Quest}/${quest.id}`}>{quest.title}</a>
+          <Link className="quest-card__link" to={`${AppRoute.Quest}/${quest.id}`}>{quest.title}</Link>
         </div>
         {/* <div class="quest-card__info-wrapper"><a class="quest-card__link" href="quest.html">Маньяк</a><span class="quest-card__info">[сегодня,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br>м. Петроградская]</span> */}
 

@@ -23,7 +23,7 @@ export const getFilteredQuests = createSelector(
       if (type === QuestType.All) {
         return quests.filter((quest) => quest.level === level);
       }
-      return quests.filter((quest) => {quest.type === type && quest.level === level});
+      return quests.filter((quest) => quest.type === type && quest.level === level);
     }
 
   }
