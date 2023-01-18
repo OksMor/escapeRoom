@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'; //, useNavigate
+import { Link, useLocation } from 'react-router-dom'; //, useNavigate
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutAction } from '../../store/api-actions';
@@ -8,6 +8,7 @@ function Header(): JSX.Element {
 
   // const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const isAuthorized = useAppSelector(getIsAuthorized);
   // const authorizedUser = useAppSelector(getAuthorizedUser);
@@ -26,7 +27,7 @@ function Header(): JSX.Element {
       );
     } else {
       return (
-        <Link className="btn btn--accent header__side-item" to={AppRoute.SignIn}>Войти</Link>
+        <Link className="btn header__side-item header__login-btn" to={AppRoute.SignIn}>Вход</Link>
       );
     }
   };
@@ -34,22 +35,32 @@ function Header(): JSX.Element {
   return (
     <header className="header">
       <div className="container container--size-l">
-        <span className="logo header__logo">
-          <svg width="134" height="52" aria-hidden="true">
-            <use xlinkHref="#logo"></use>
-          </svg>
-        </span>
+
+        {(location.pathname === AppRoute.Root) ?
+          <span className="logo header__logo">
+            <svg width="134" height="52" aria-hidden="true">
+              <use xlinkHref="#logo"></use>
+            </svg>
+          </span> :
+          <Link className="logo header__logo" to={AppRoute.Root}>
+            <svg width="134" height="52" aria-hidden="true">
+              <use xlinkHref="#logo"></use>
+            </svg>
+          </Link>}
+
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <a className="link active" href="index.html">Квесты</a>
+              <a className={`link ${AppRoute.Root === location.pathname ? 'active' : ''}`} href={AppRoute.Root}>Квесты</a>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="contacts.html">Контакты</a>
+              <a className={`link ${AppRoute.Contacts === location.pathname ? 'active' : ''}`} href={AppRoute.Contacts}>Контакты</a>
             </li>
-            <li className="main-nav__item">
-              <a className="link" href="my-quests.html">Мои бронирования</a>
-            </li>
+
+            {isAuthorized ?
+              <li className="main-nav__item">
+                <a className={`link ${AppRoute.MyReservations === location.pathname ? 'active' : ''}`} href={AppRoute.MyReservations}>Мои бронирования</a>
+              </li> : ''}
           </ul>
         </nav>
         <div className="header__side-nav">

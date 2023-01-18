@@ -1,28 +1,20 @@
+import { QuestType, QuestLevel } from "../const"
+
 type Quest = {
   id: number;
   title: string;
-  previewImage: string;
+  previewImg: string;
   previewImgWebp: string;
-  level: string; //enum --- easy┃medium┃hard Allowed
-  type: string;  //enum --- adventures┃horror┃mystic┃detective┃sci-fi Allowed
+  level: QuestType; //enum --- easy┃medium┃hard Allowed
+  type: QuestLevel;  //enum --- adventures┃horror┃mystic┃detective┃sci-fi Allowed
   peopleMinMax: [number, number];
-}
-
-type Request = {
-  id: number;
-  title: string;
-  previewImage: string;
-  previewImgWebp: string;
-  level: string; //enum --- easy┃medium┃hard Allowed
-  type: string;  //enum --- adventures┃horror┃mystic┃detective┃sci-fi Allowed
-  peopleMinMax: [number];
 
   description: string;
   coverImg: string;
-  coverImgWeb: string;
+  coverImgWebp: string;
 }
 
-type Booking = {
+type Booking = {//-----------------------------------------------------------не исп
   id: number
   locations: [{
     id: number
@@ -40,7 +32,7 @@ type Booking = {
     }]}
 }
 
-type NewBooking = {
+type NewBooking = { //-----------------------------------------------------------не исп
   id: number;
   //date: enum;
   //today ┃ tomorrow;
@@ -63,4 +55,4 @@ type UserData = {
   token: string;
 };
 
-export type { Quest, Request, Booking, NewBooking, AuthData, UserData };
+export type { Quest, Booking, NewBooking, AuthData, UserData };

@@ -1,24 +1,22 @@
 export enum AppRoute {
   Root = '/',
   SignIn = '/login',
-  // MyList = '/mylist',
-  Quest = '/quests/:id',
-  // AddReview = '/review',
-  // Player = '/player',
+  MyReservations = '/reservation',
+  Quest = '/quest',
+  Booking = '/quest/:id/booking',
+  Contacts = '/contacts',
 }
 
 export enum APIRoute {
   Quests = '/quest',
   Login = '/login',
   Logout = '/logout',
-  // Promo = '/promo',
-  // Review = '/comments',
-  // Favorites = '/favorite',
+  Reservations = '/reservation',
 }
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN'
+  Unknown = 'UNKNOWN',
 }
 
 export enum NameSpace {
@@ -26,7 +24,7 @@ export enum NameSpace {
   User = 'USER',
   Quests = 'QUESTS',
   // PromoFilm = 'PROMOFILM',
-  // CurrentFilm = 'CURRENTFILM',
+  CurrentQuest = 'CURRENTQUEST',
   // SimilarFilms = 'SIMILARFILMS',
   // Reviews = 'REVIEWS',
   // FavoritesFilms = 'FAVORITESFILMS',
@@ -34,27 +32,47 @@ export enum NameSpace {
 
 // export const PLAYER_DELAY = 1000;
 
-export const DEFAULT_GENRE_FILTER = 'All Genres';
-
 // export enum ReviewLength {
 //   Min = 50,
 //   Max = 400
 // }
 
-export enum LevelQuest{
-  Easy,
-  Medium,
-  Hard,
+export enum QuestType {
+  All = 'all',
+  Adventure = 'adventures',
+  Horror = 'horror',
+  Mystic = 'mystic',
+  Detective = 'detective',
+  SciFi = 'sci-fi',
 }
 
-export enum TypeQuest {
-  Adventures,
-  Horror,
-  Mystic,
-  Detective,
-  SciFi,
-  Allowed,
+export enum QuestLevel {
+  Any = 'any',
+  Easy = 'easy',
+  Middle = 'medium',
+  Hard = 'hard',
 }
+
+export const DIFFICULTY: Record<string, string> = {
+  'hard': 'сложный',
+  'medium': 'средний',
+  'easy': 'легкий',
+};
+
+export const TYPE: Record<string, string> = {
+  'horror': 'ужасы',
+  'mystic': 'мистика',
+  'detective': 'детектив',
+  'adventures': 'приключения',
+  'sci-fi': 'sci-fi',
+};
+
+export const DAYS: Record<string, string> = {
+  'today': 'сегодня',
+  'tomorrow': 'завтра',
+};
+
+
 export enum ErrorMessage {
   InvalidEmail = 'Please enter a valid email',
   InvalidPassword = 'Please enter a valid password',

@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppState } from '../../types/state';
-import { DEFAULT_GENRE_FILTER, NameSpace } from '../../const';
+import { NameSpace, QuestLevel, QuestType } from '../../const';
 
 const initialState: AppState = {
-  currentGenre: DEFAULT_GENRE_FILTER,
-
+  currentType: QuestType.All,
+  currentLevel: QuestLevel.Any,
 };
 
 export const appProcess = createSlice({
   name: NameSpace.Quests,
   initialState,
   reducers: {
-    genreSet: (state, action: PayloadAction<string>) => {
-      state.currentGenre = action.payload;
+    levelSet: (state, action: PayloadAction<string>) => {
+      state.currentLevel = action.payload;
     },
-    genreReset: (state) => {
-      state.currentGenre = DEFAULT_GENRE_FILTER;
+    levelReset: (state) => {
+      state.currentLevel = QuestLevel.Any;
+    },
+    typeSet: (state, action: PayloadAction<string>) => {
+      state.currentType = action.payload;
+    },
+    typeReset: (state) => {
+      state.currentType = QuestLevel.Any;
     },
   },
 });
 
-export const {genreSet, genreReset } = appProcess.actions;
+export const {levelSet, levelReset, typeSet, typeReset } = appProcess.actions;

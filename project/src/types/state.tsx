@@ -12,7 +12,8 @@ export type UserState = {
 };
 
 export type AppState = {
-  currentGenre: string;
+  currentType: string;
+  currentLevel: string;
 };
 
 export type QuestsState = {
@@ -25,10 +26,10 @@ export type QuestsState = {
 //   isLoading: boolean;
 // };
 
-// export type CurrentFilmState = {
-//   film: Film | null;
-//   isLoading: boolean;
-// };
+export type CurrentQuestState = {
+  quest: Quest | null;
+  isLoading: boolean;
+};
 
 // export type SimilarFilmsState = {
 //   films: Film[];

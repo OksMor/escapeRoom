@@ -16,14 +16,14 @@ export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, {
   async (_arg, {extra: api}) => (await api.get<Quest[]>(APIRoute.Quests)).data,
 );
 
-// export const fetchCurrentFilmAction = createAsyncThunk<Film, string, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/fetchCurrentFilm',
-//   async (filmId, {extra: api}) => (await api.get<Film>(`${APIRoute.Films}/${filmId}`)).data,
-// );
+export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchCurrentQuest',
+  async (questId, {extra: api}) => (await api.get<Quest>(`${APIRoute.Quests}/${questId}`)).data,
+);
 
 // export const fetchSimilarFilmsAction = createAsyncThunk<Film[], string, {
 //   dispatch: AppDispatch;

@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Quest } from '../../types/types';
+import { AppRoute, DIFFICULTY } from '../../const';
 
 type QuestCardProps = {
   quest: Quest;
@@ -7,17 +10,20 @@ type QuestCardProps = {
 function QuestCard(props: QuestCardProps): JSX.Element {
   const { quest } = props;
 
+  const navigate = useNavigate();
+
   return (
-    <div className="quest-card">
+    <div className="quest-card" onClick={() => navigate(`${AppRoute.Quest}/${quest.id}`)}>
       <div className="quest-card__img">
-        {/* <picture>
-          <source type="image/webp" srcset="img/content/mars/mars-size-s.webp, img/content/mars/mars-size-s@2x.webp 2x"><img src="img/content/mars/mars-size-s.jpg" srcset="img/content/mars/mars-size-s@2x.jpg 2x" width="344" height="232" alt="Сюрреалистичное изображение человека.">
-        </picture> */}
+        <picture>
+          <source type="image/webp" srcSet={quest.previewImgWebp}/>
+          <img src={quest.previewImg} width="344" height="232" alt={quest.title}/>
+        </picture>
       </div>
 
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <a className="quest-card__link" href="quest.html">{quest.title}</a>
+          <a className="quest-card__link" href={`${AppRoute.Quest}/${quest.id}`}>{quest.title}</a>
         </div>
         {/* <div class="quest-card__info-wrapper"><a class="quest-card__link" href="quest.html">Маньяк</a><span class="quest-card__info">[сегодня,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br>м. Петроградская]</span> */}
 
@@ -25,12 +31,12 @@ function QuestCard(props: QuestCardProps): JSX.Element {
           <li className="tags__item">
             <svg width="11" height="14" aria-hidden="true">
               <use xlinkHref="#icon-person"></use>
-            </svg>{quest.peopleMinMax[0]}&ndash;{quest.peopleMinMax[1]}&nbsp;чел
+            </svg>{quest.peopleMinMax[0]}&ndash;{quest.peopleMinMax ? quest.peopleMinMax[1] : ''}&nbsp;чел
           </li>
           <li className="tags__item">
             <svg width="14" height="14" aria-hidden="true">
               <use xlinkHref="#icon-level"></use>
-            </svg>{quest.level}Лёгкий
+            </svg>{DIFFICULTY[quest.level]}
           </li>
         </ul>
         <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>

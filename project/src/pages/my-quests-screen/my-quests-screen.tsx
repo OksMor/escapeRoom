@@ -27,8 +27,8 @@ function MyQuestsScreen(): JSX.Element {
           {isQuestsLoading ? <LoadingScreen/> : <QuestsList quests={quests} />}
         </div>
       </main>
-    <Footer/>
-  </div>
+      <Footer/>
+    </div>
   );
 }
 
