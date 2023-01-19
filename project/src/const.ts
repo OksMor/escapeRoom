@@ -8,10 +8,10 @@ export enum AppRoute {
 }
 
 export enum APIRoute {
-  Quests = '/quest',
-  Login = '/login',
-  Logout = '/logout',
-  Reservations = '/reservation',
+  Quests = 'escape-room/quest',
+  Login = 'escape-room/login',
+  Logout = 'escape-room/logout',
+  Reservations = 'escape-room/reservation',
 }
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -23,14 +23,10 @@ export enum NameSpace {
   App = 'APP',
   User = 'USER',
   Quests = 'QUESTS',
-  // PromoFilm = 'PROMOFILM',
   CurrentQuest = 'CURRENTQUEST',
-  // SimilarFilms = 'SIMILARFILMS',
   // Reviews = 'REVIEWS',
-  // FavoritesFilms = 'FAVORITESFILMS',
+  ReservationQuests = 'RESERVATIONSQUESTS',
 }
-
-// export const PLAYER_DELAY = 1000;
 
 // export enum ReviewLength {
 //   Min = 50,
@@ -46,6 +42,15 @@ export enum QuestType {
   SciFi = 'sci-fi',
 }
 
+export const QUESTS_TYPES = [
+  {id: 'all', icon: '#icon-all-quests', width: '26', type: 'Все квесты', questType: QuestType.All},
+  {id: 'adventure', icon: '#icon-adventure', width: '36', type: 'Приключения', questType: QuestType.Adventure},
+  {id: 'horror', icon: '#icon-horror', width: '30', type: 'Ужасы', questType: QuestType.Horror},
+  {id: 'mystic', icon: '#icon-mystic', width: '30', type: 'Мистика', questType: QuestType.Mystic},
+  {id: 'detective', icon: '#icon-detective', width: '40', type: 'Детектив', questType: QuestType.Detective},
+  {id: 'sciFi', icon: '#icon-sci-fi', width: '28', type: 'Sci-fi', questType: QuestType.SciFi},
+];
+
 export enum QuestLevel {
   Any = 'any',
   Easy = 'easy',
@@ -53,13 +58,20 @@ export enum QuestLevel {
   Hard = 'hard',
 }
 
-export const DIFFICULTY: Record<string, string> = {
+export const QUESTS_LEVELS = [
+  {id: 'any', level: 'Любой', questLevel: QuestLevel.Any},
+  {id: 'easy', level: 'Лёгкий', questLevel: QuestLevel.Easy},
+  {id: 'middle', level: 'Средний', questLevel: QuestLevel.Middle},
+  {id: 'hard', level: 'Сложный', questLevel: QuestLevel.Hard},
+];
+
+export const LEVEL_QUEST: Record<string, string> = {
   'hard': 'сложный',
   'medium': 'средний',
   'easy': 'легкий',
 };
 
-export const TYPE: Record<string, string> = {
+export const TYPE_QUEST: Record<string, string> = {
   'horror': 'ужасы',
   'mystic': 'мистика',
   'detective': 'детектив',
@@ -71,7 +83,6 @@ export const DAYS: Record<string, string> = {
   'today': 'сегодня',
   'tomorrow': 'завтра',
 };
-
 
 export enum ErrorMessage {
   InvalidEmail = 'Please enter a valid email',
@@ -85,4 +96,23 @@ export const PASSWORD_PATTERN = /([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*/;
 export enum SingInField {
   UserEmail = 'user-email',
   UserPassword = 'user-password',
+}
+
+export const CONTACTS = {
+  address: {
+    city: 'Санкт-Петербург,',
+    full: 'Набережная реки Карповка, д 5П',
+  },
+  mode: 'Ежедневно, c 10:00 до 22:00',
+  phone: '8 (000) 111-11-11',
+  phoneHref: 'tel:88003335599',
+  mail: 'info@escape-room.ru',
+  mailHref: 'mailto:info@escape-room.ru',
+  lat: 59.968137,
+  lng: 30.316272,
+};
+
+export enum UrlMapMarket {
+  Default = 'img/svg/pin-default.svg',
+  Current = 'img/svg/pin-active.svg',
 }

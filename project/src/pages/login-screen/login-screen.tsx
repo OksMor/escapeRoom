@@ -53,7 +53,7 @@ function LoginScreen(): JSX.Element {
       }
 
       onSubmit({
-        email: emailRef.current.value,
+        login: emailRef.current.value,
         password: passwordRef.current.value,
       });
     }
@@ -91,15 +91,15 @@ function LoginScreen(): JSX.Element {
                 </div>
 
                 <div className="login-form__inputs">
-                  <div className="custom-input login-form__input">
-                    {/* {`sign-in__field ${errFieldId === SingInField.UserEmail ? 'sign-in__field--error' : ''}`} */}
+                  <div className={`custom-input login-form__input ${errFieldId === SingInField.UserEmail ? 'sign-in__field--error' : ''}`}>
+                    {/* {`custom-input login-form__input ${errFieldId === SingInField.UserEmail ? 'sign-in__field--error' : ''}`} custom-input login-form__input*/}
                     <label className="custom-input__label" htmlFor="email">E&nbsp;&ndash;&nbsp;mail</label>
                     <input type="email" id="email" name="email" placeholder="Адрес электронной почты" required ref={emailRef}/>
                   </div>
-                  <div className="custom-input login-form__input">
-                    {/* {`sign-in__field ${errFieldId === SingInField.UserPassword ? 'sign-in__field--error' : ''}`} */}
+                  <div className={`custom-input login-form__input ${errFieldId === SingInField.UserPassword ? 'sign-in__field--error' : ''}`}>
+                    {/* {`sign-in__field ${errFieldId === SingInField.UserPassword ? 'sign-in__field--error' : ''}`}custom-input login-form__input  */}
                     <label className="custom-input__label" htmlFor="password">Пароль</label>
-                    <input type="password" id="password" name="password" placeholder="Пароль" required ref={passwordRef}/>
+                    <input type="password" id="password" name="password" placeholder="Пароль минимум 3 символа" required ref={passwordRef}/>
                   </div>
                 </div>
                 <button className="btn btn--accent btn--general login-form__submit" type="submit">Войти</button>

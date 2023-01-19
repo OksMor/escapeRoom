@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
-import { AppRoute, DIFFICULTY, TYPE } from '../../const';
+import { AppRoute, LEVEL_QUEST, TYPE_QUEST } from '../../const';
 
 import { fetchCurrentQuestAction } from '../../store/api-actions';
 import { getCurrentQuest, getIsCurrentQuestLoading } from '../../store/current-quest-process/selector';
@@ -62,7 +62,7 @@ function QuestScreen(): JSX.Element {
         <div className="container container--size-l">
           <div className="quest-page__content">
             <h1 className="title title--size-l title--uppercase quest-page__title">{quest.title}</h1>
-            <p className="subtitle quest-page__subtitle"><span className="visually-hidden">Жанр:</span>{TYPE[quest.type]}
+            <p className="subtitle quest-page__subtitle"><span className="visually-hidden">Жанр:</span>{TYPE_QUEST[quest.type]}
             </p>
             <ul className="tags tags--size-l quest-page__tags">
               <li className="tags__item">
@@ -73,7 +73,7 @@ function QuestScreen(): JSX.Element {
               <li className="tags__item">
                 <svg width="14" height="14" aria-hidden="true">
                   <use xlinkHref="#icon-level"></use>
-                </svg>{DIFFICULTY[quest.level]}
+                </svg>{LEVEL_QUEST[quest.level]}
               </li>
             </ul>
             <p className="quest-page__description">{quest.description}</p>

@@ -46,7 +46,7 @@ type NewBooking = { //----------------------------------------------------------
 }
 
 type AuthData = {
-  email: string;
+  login: string;
   password: string;
 };
 

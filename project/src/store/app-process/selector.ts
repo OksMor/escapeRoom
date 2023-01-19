@@ -1,8 +1,7 @@
-import { QuestType } from './../../const';
 import { createSelector } from '@reduxjs/toolkit';
 import { Quest } from '../../types/types';
 import { State } from '../../types/state';
-import { QuestLevel, NameSpace } from '../../const';
+import { QuestLevel, QuestType, NameSpace } from '../../const';
 
 export const getQuests = (state: State): Quest[] => state[NameSpace.Quests].quests;
 
@@ -10,21 +9,49 @@ export const getCurrentLevel = (state: State): string => state[NameSpace.App].cu
 
 export const getCurrentType = (state: State): string => state[NameSpace.App].currentType;
 
-export const getFilteredQuests = createSelector(
-  [getQuests, getCurrentLevel, getCurrentType],
-  (quests, level, type) => {
+// export const getFilteredQuests = createSelector(
+//   [getQuests, getCurrentLevel, getCurrentType],
+//   (quests, levelQuest, typeQuest) => {
 
-    if (level === QuestLevel.Any) {
-      if (type === QuestType.All) {
-        return quests;
-      }
-      return quests.filter((quest) => quest.type === type);
-    } else {
-      if (type === QuestType.All) {
-        return quests.filter((quest) => quest.level === level);
-      }
-      return quests.filter((quest) => quest.type === type && quest.level === level);
+//     if (levelQuest === QuestLevel.Any) {
+//       if (typeQuest === QuestType.All) {
+//         return quests;
+//       }
+//       return quests.filter((quest) => quest.type === typeQuest);
+//     } else {
+//       if (typeQuest === QuestType.All) {
+//         return quests.filter((quest) => quest.level === levelQuest);
+//       }
+//       return quests.filter((quest) => quest.type === typeQuest && quest.level === levelQuest);
+//     }
+
+//   }
+// );
+
+const getFilterGenreQuests = createSelector(
+  [getQuests, getCurrentType],
+  (quests: Quest[], filterType: string) => {
+
+    let filteredQuests = quests.slice();
+
+    if (filterType !== QuestType.All) {
+      filteredQuests = quests.filter((item: Quest) => item.type === filterType).slice();
     }
 
+    return filteredQuests;
+  }
+);
+
+export const getFilterQuests = createSelector(
+  [getFilterGenreQuests, getCurrentLevel],
+  (quests: Quest[], filterType: string) => {
+
+    let filteredQuests = quests.slice();
+
+    if (filterType !== QuestLevel.Any) {
+      filteredQuests = quests.filter((item: Quest) => item.level === filterType).slice();
+    }
+
+    return filteredQuests;
   }
 );

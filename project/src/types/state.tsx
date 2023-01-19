@@ -21,27 +21,17 @@ export type QuestsState = {
   isLoading: boolean;
 };
 
-// export type PromoFilmState = {
-//   film: Film | null;
-//   isLoading: boolean;
-// };
-
 export type CurrentQuestState = {
   quest: Quest | null;
   isLoading: boolean;
 };
-
-// export type SimilarFilmsState = {
-//   films: Film[];
-//   isLoading: boolean;
-// };
 
 // export type ReviewsState = {
 //   comments: Review[];
 //   isLoading: boolean;
 // };
 
-// export type FavoritesFilmsState = {
-//   films: Film[];
-//   isLoading: boolean;
-// };
+export type ReservationQuestsState = {
+  quests: Quest[];
+  isLoading: boolean;
+};

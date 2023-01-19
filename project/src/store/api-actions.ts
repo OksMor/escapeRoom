@@ -77,26 +77,26 @@ export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, {
 //   }
 // );
 
-// export const fetchFavoritesFilmsAction = createAsyncThunk<Film[], undefined, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/fetchFavoritesFilm',
-//   async (_arg, {extra: api}) => (await api.get<Film[]>(APIRoute.Favorites)).data,
-// );
+export const fetchReservationQuestsAction = createAsyncThunk<Quest[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReservationQuests',
+  async (_arg, {extra: api}) => (await api.get<Quest[]>(APIRoute.Reservations)).data,
+);
 
-// export const postFavoriteStatusAction = createAsyncThunk<void, [number, boolean], {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/postFavoriteStatus',
-//   async ([id, status], { dispatch, extra: api}) => {
-//     await api.post<Film>(`${APIRoute.Favorites}/${id}/${Number(status)}`);
-//     dispatch(fetchFavoritesFilmsAction());
-//   },
-// );
+export const postReservationStatusAction = createAsyncThunk<void, [number, boolean], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/postReservationStatus',
+  async ([id, status], { dispatch, extra: api}) => {
+    await api.post<Quest>(`${APIRoute.Reservations}/${id}/${Number(status)}`);
+    dispatch(fetchReservationQuestsAction());
+  },
+);
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
@@ -113,7 +113,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   extra: AxiosInstance;
 }>(
   'user/login',
-  async ({email, password}, {dispatch, extra: api}) => {
+  async ({login: email, password}, {dispatch, extra: api}) => {
     const { data } = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
     dispatch(redirectToRoute(AppRoute.Root));

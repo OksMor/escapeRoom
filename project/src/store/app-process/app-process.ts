@@ -14,16 +14,16 @@ export const appProcess = createSlice({
     levelSet: (state, action: PayloadAction<string>) => {
       state.currentLevel = action.payload;
     },
-    levelReset: (state) => {
-      state.currentLevel = QuestLevel.Any;
-    },
+    // levelReset: (state) => {
+    //   state.currentLevel = QuestLevel.Any;
+    // },
     typeSet: (state, action: PayloadAction<string>) => {
       state.currentType = action.payload;
     },
-    typeReset: (state) => {
-      state.currentType = QuestLevel.Any;
-    },
+    // typeReset: (state) => {
+    //   state.currentType = QuestType.All;
+    // },
   },
 });
 
-export const {levelSet, levelReset, typeSet, typeReset } = appProcess.actions;
+export const { levelSet, typeSet } = appProcess.actions; //levelReset, typeReset
