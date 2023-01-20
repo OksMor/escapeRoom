@@ -1,6 +1,6 @@
 import { store } from '../store/index.js';
 import { AuthorizationStatus } from '../const.js';
-import { UserData, Quest } from './types.js'; //, Request, Booking, NewBooking, AuthData Quest
+import { UserData, Quest, Booking } from './types.js';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -26,12 +26,12 @@ export type CurrentQuestState = {
   isLoading: boolean;
 };
 
-// export type ReviewsState = {
-//   comments: Review[];
-//   isLoading: boolean;
-// };
-
 export type ReservationQuestsState = {
   quests: Quest[];
+  isLoading: boolean;
+};
+
+export type BookingState = {
+  comments: Booking[];
   isLoading: boolean;
 };

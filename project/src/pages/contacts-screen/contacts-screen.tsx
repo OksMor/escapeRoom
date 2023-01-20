@@ -1,30 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 
-import { CONTACTS } from '../../const';
+import { CONTACTS, CONTACTS_LOCATION } from '../../const';
+import { MarkerLocation } from '../../types/types';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 
-
-
-type MarkerLocation = {
-  latitude: number;
-  longitude: number;
-  locationId: number;
-  address: string;
-};
-
-const CONTACT_LOCATION: MarkerLocation = {
-  latitude: 59.969718,
-  longitude: 30.307523,
-  locationId: 0,
-  address: 'Санкт-Петербург, Набережная реки Карповка, д 5П'
-};
-
 function ContactsScreen(): JSX.Element {
 
-  const locations: MarkerLocation[] = [CONTACT_LOCATION];
+  const locations: MarkerLocation[] = [CONTACTS_LOCATION];
 
   return (
     <>
@@ -74,11 +59,11 @@ function ContactsScreen(): JSX.Element {
             </dl>
             <div className="contacts__map">
               <div className="map">
-              <Map
-                    locations = { locations }
-                    selectedPoint = {{} as MarkerLocation}
-                    onClickFunction = { () => void {} }
-                  />
+                <Map
+                  locations = {locations}
+                  selectedPoint = {{} as MarkerLocation}
+                  onClickFunction = { () => void {} }
+                />
               </div>
             </div>
           </div>

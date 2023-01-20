@@ -6,9 +6,9 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
 import { AppRoute, LEVEL_QUEST, TYPE_QUEST } from '../../const';
 
-import { fetchCurrentQuestAction } from '../../store/api-actions';
+import { fetchCurrentQuestAction, fetchReservationQuestsAction } from '../../store/api-actions';
 import { getCurrentQuest, getIsCurrentQuestLoading } from '../../store/current-quest-process/selector';
-// import { getIsAuthorized } from '../../store/user-process/selector';
+import { getIsAuthorized } from '../../store/user-process/selector';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
@@ -22,7 +22,7 @@ function QuestScreen(): JSX.Element {
 
   const quest = useAppSelector(getCurrentQuest);
   const isCurrentQuestLoading = useAppSelector(getIsCurrentQuestLoading);
-  // const isAuthorized = useAppSelector(getIsAuthorized);
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   useEffect(() => {
     if (params.id && quest?.id.toString() !== params.id) {
@@ -30,11 +30,11 @@ function QuestScreen(): JSX.Element {
     }
   }, [params.id, dispatch, quest?.id]);
 
-  // useEffect(() => {
-  //   if (isAuthorized) {
-  //     dispatch(fetchFavoritesFilmsAction());
-  //   }
-  // }, [dispatch, isAuthorized]);
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(fetchReservationQuestsAction());
+    }
+  }, [dispatch, isAuthorized]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,7 +77,7 @@ function QuestScreen(): JSX.Element {
               </li>
             </ul>
             <p className="quest-page__description">{quest.description}</p>
-            <Link className="btn btn--accent btn--cta quest-page__btn" to={AppRoute.SignIn}>Забронировать</Link>
+            <Link className="btn btn--accent btn--cta quest-page__btn" to={ isAuthorized ? AppRoute.Booking.replace(':id', `${Number(params.id)}`) : AppRoute.SignIn}>Забронировать</Link>
           </div>
         </div>
       </main>

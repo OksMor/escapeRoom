@@ -1,6 +1,16 @@
 import { QuestType, QuestLevel } from '../const';
 
-type Quest = {
+export type AuthData = {
+  login: string;
+  password: string;
+};
+
+export type UserData = {
+  email: string;
+  token: string;
+};
+
+export type Quest = {
   id: number;
   title: string;
   previewImg: string;
@@ -14,23 +24,31 @@ type Quest = {
   coverImgWebp: string;
 }
 
-type Booking = {//-----------------------------------------------------------не исп
+export type Booking = {//-----------------------------------------------------------не исп
   id: number;
   locations: [{
     id: number;
     address: string;
-    coords: [number]; //Ключ coords представлен массивом из двух значений. Например, [59.968322, 30.317359].
+    coords: [number]; // Например, [59.968322, 30.317359].
   }];
   slots: {
     today: [{
-    time: string;
-    isAvailable: boolean;
-  }];
+      time: string;
+      isAvailable: boolean;
+    }];
     tomorrow: [{
-    time: string;
-    isAvailable: boolean;
-  }];};
+      time: string;
+      isAvailable: boolean;
+    }];
+  };
 }
+
+export type MarkerLocation = {//-----------------------------------------------------------не исп
+  lat: number;
+  lng: number;
+  id: number;
+  address: string;
+};
 
 type NewBooking = { //-----------------------------------------------------------не исп
   id: number;
@@ -44,15 +62,3 @@ type NewBooking = { //----------------------------------------------------------
   locationId: number;
   questId: number;
 }
-
-type AuthData = {
-  login: string;
-  password: string;
-};
-
-type UserData = {
-  email: string;
-  token: string;
-};
-
-export type { Quest, Booking, NewBooking, AuthData, UserData };

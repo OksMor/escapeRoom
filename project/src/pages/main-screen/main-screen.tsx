@@ -5,16 +5,16 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { AuthorizationStatus } from '../../const';
 
 import { fetchQuestsAction, fetchReservationQuestsAction } from '../../store/api-actions';
-
 import { getIsQuestsLoading } from '../../store/quests-process/selector';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
 import { getFilterQuests } from '../../store/app-process/selector';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
-import QuestsList from '../../components/quests-list/quests-list';
 
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+
+import QuestsList from '../../components/quests-list/quests-list';
 import QuestTypeList from '../../components/quest-type-list/quest-type-list';
 import QuestLevelList from '../../components/quest-level-list/quest-level-list';
 

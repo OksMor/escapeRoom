@@ -13,6 +13,7 @@ export enum APIRoute {
   Logout = 'escape-room/logout',
   Reservations = 'escape-room/reservation',
 }
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -24,7 +25,7 @@ export enum NameSpace {
   User = 'USER',
   Quests = 'QUESTS',
   CurrentQuest = 'CURRENTQUEST',
-  // Reviews = 'REVIEWS',
+  Booking = 'BOOKING',
   ReservationQuests = 'RESERVATIONSQUESTS',
 }
 
@@ -79,23 +80,17 @@ export const TYPE_QUEST: Record<string, string> = {
   'sci-fi': 'sci-fi',
 };
 
-export const DAYS: Record<string, string> = {
-  'today': 'сегодня',
-  'tomorrow': 'завтра',
-};
-
-export enum ErrorMessage {
-  InvalidEmail = 'Please enter a valid email',
-  InvalidPassword = 'Please enter a valid password',
+export enum SingInField {
+  UserEmail = 'user-email',
+  UserPassword = 'user-password',
 }
-
 export const EMAIL_PATTERN = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/;
 
 export const PASSWORD_PATTERN = /([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*/;
 
-export enum SingInField {
-  UserEmail = 'user-email',
-  UserPassword = 'user-password',
+export enum ErrorMessage {
+  InvalidEmail = 'Please enter a valid email',
+  InvalidPassword = 'Please enter a valid password',
 }
 
 export const CONTACTS = {
@@ -108,11 +103,23 @@ export const CONTACTS = {
   phoneHref: 'tel:88003335599',
   mail: 'info@escape-room.ru',
   mailHref: 'mailto:info@escape-room.ru',
+};
+
+export const CONTACTS_LOCATION = {
+  address: 'Санкт-Петербург, Набережная реки Карповка, д 5П',
   lat: 59.968137,
   lng: 30.316272,
+  id: 0,
 };
+
+export const MAP_ZOOM = 10;
 
 export enum UrlMapMarket {
   Default = 'img/svg/pin-default.svg',
   Current = 'img/svg/pin-active.svg',
 }
+
+// export const DAYS: Record<string, string> = {
+//   'today': 'сегодня',
+//   'tomorrow': 'завтра',
+// };

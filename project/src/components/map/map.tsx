@@ -1,20 +1,10 @@
-import { useRef } from 'react';
-import { Icon, Marker, LeafletMouseEvent } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/useMap';
 
-import { useEffect } from 'react';
-
-export const URL_MARKER_DEFAULT = '/img/svg/pin-default.svg';
-
-export const URL_MARKER_CURRENT = '/img/svg/pin-active.svg';
-
-type MarkerLocation = {
-  latitude: number;
-  longitude: number;
-  locationId: number;
-  address: string;
-};
+import { Icon, Marker, LeafletMouseEvent } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { UrlMapMarket } from '../../const';
+import { MarkerLocation } from '../../types/types';
 
 type MapProps = {
   locations: MarkerLocation[];
@@ -23,13 +13,13 @@ type MapProps = {
 };
 
 const defaultCustomIcon = new Icon ({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: UrlMapMarket.Default,
   iconSize: [27,39],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon ({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: UrlMapMarket.Current,
   iconSize: [27,39],
   iconAnchor: [20,40],
 });
@@ -42,13 +32,13 @@ function Map ({ locations, selectedPoint, onClickFunction } : MapProps): JSX.Ele
     if (map) {
       locations.forEach((location) => {
         const marker = new Marker ({
-          lat: location.latitude,
-          lng: location.longitude
+          lat: location.lat,
+          lng: location.lng,
         });
 
         marker
           .setIcon(
-            selectedPoint !== undefined && location.latitude === selectedPoint.latitude && location.longitude === selectedPoint.longitude
+            selectedPoint !== undefined && location.lat === selectedPoint.lat && location.lng === selectedPoint.lng
               ? currentCustomIcon
               : defaultCustomIcon
           ).on('click', onClickFunction)
@@ -58,10 +48,7 @@ function Map ({ locations, selectedPoint, onClickFunction } : MapProps): JSX.Ele
   }, [map, locations, selectedPoint, onClickFunction]);
 
   return(
-    <section className = 'escape-room__map map'
-      ref = {mapRef}
-    >
-    </section>
+    <div className = "map__container" ref = {mapRef}></div>
   );
 }
 

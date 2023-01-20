@@ -14,6 +14,7 @@ import QuestScreen from '../../pages/quest-screen/quest-screen';
 import ContactsScreen from '../../pages/contacts-screen/contacts-screen';
 import MyQuestsScreen from '../../pages/my-quests-screen/my-quests-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
+import BookingScreen from '../../pages/booking-screen/booking-screen';
 
 import NotFoundScreen from '../../pages/no-found-screen/no-found-screen';
 
@@ -45,14 +46,14 @@ function App(): JSX.Element {
               </PrivateRoute>
             }
           />
-          {/* <Route
-            path={`${AppRoute.Film}/:id${AppRoute.AddReview}`}
+          <Route
+            path={AppRoute.Booking}
             element={
               <PrivateRoute >
-                <AddReviewScreen />
+                <BookingScreen />
               </PrivateRoute>
             }
-          /> */}
+          />
           <Route
             path={AppRoute.Contacts}
             element={<ContactsScreen />}
