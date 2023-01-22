@@ -1,19 +1,22 @@
-import { useParams } from 'react-router-dom';
+
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import { LeafletMouseEvent } from 'leaflet';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { QuestLocation } from '../../types/types';
+
 import { fetchCurrentQuestAction, fetchBookingAction } from '../../store/api-actions';
 import { getCurrentQuest } from '../../store/current-quest-process/selector';
 import { getQuestBooking } from '../../store/booking-process/selector';
-import { QuestLocation } from '../../types/types';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FormBooking from '../../components/form-booking/form-booking';
 import Map from '../../components/map/map';
+
 import NotFoundScreen from '../no-found-screen/no-found-screen';
 
 function BookingScreen(): JSX.Element {

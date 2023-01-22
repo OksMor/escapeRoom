@@ -109,14 +109,14 @@ function FormBooking(props: FormBookingProps): JSX.Element {
         <div className="custom-input booking-form__input">
           <label className="custom-input__label" htmlFor="tel">Контактный телефон</label>
           <input type="tel" id="tel" placeholder="Телефон" {...register('tel', { required: true, pattern: /^((\+7)+([0-9]){10})$/ })} aria-invalid={errors.name ? 'true' : 'false'}/>
-          {errors.tel?.type === 'required' && <><br/><span role="alert">Укажите, пожалуйста, Ваш телефон</span></>}
+          {errors.tel?.type === 'required' && <><br/><span role="alert">Укажите Ваш телефон</span></>}
           {errors.tel?.type === 'pattern' && <><br/><span role="alert">Номер формата +7(000) 000-00-00 (Ру-формат)</span></>}
         </div>
         <div className="custom-input booking-form__input">
           <label className="custom-input__label" htmlFor="person">Количество участников</label>
           <input type="number" id="person" placeholder="Количество участников" {...register('person', { required: true, validate: { checkPersonValidate } })} aria-invalid={errors.person ? 'true' : 'false'}/>
-          {errors.person?.type === 'required' && <><br/><span role="alert">Введите количество желающих</span></>}
-          {errors.person?.type === 'validate' && <><br/><span role="alert">Количество желающих должно совпадать с описанием квеста</span></>}
+          {errors.person?.type === 'required' && <><br/><span role="alert">Введите количество участников</span></>}
+          {errors.person?.type === 'validate' && <><br/><span role="alert">Количество участников должно совпадать с описанием в квесте</span></>}
         </div>
         <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
           <input type="checkbox" id="children" {...register('children')} />

@@ -7,14 +7,13 @@ import Header from '../../components/header/header';
 import QuestsList from '../../components/quests-list/quests-list';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 
-import { getIsQuestsLoading } from '../../store/quests-process/selector';
-import { getFilterQuests } from '../../store/app-process/selector';
+import { getReservationQuests, getIsReservationQuestsLoading } from '../../store/reservation-quests-process/selector';
 import { fetchReservationQuestsAction } from '../../store/api-actions';
 
 function MyQuestsScreen(): JSX.Element {
 
-  const myQuests = useAppSelector(getFilterQuests);
-  const isQuestsLoading = useAppSelector(getIsQuestsLoading);
+  const myQuests = useAppSelector(getReservationQuests);
+  const isQuestsLoading = useAppSelector(getIsReservationQuestsLoading);
 
   const dispatch = useAppDispatch();
 

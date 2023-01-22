@@ -75,19 +75,6 @@ export const TYPE_QUEST: Record<string, string> = {
   'sci-fi': 'sci-fi',
 };
 
-export enum SingInField {
-  UserEmail = 'user-email',
-  UserPassword = 'user-password',
-}
-export const EMAIL_PATTERN = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/;
-
-export const PASSWORD_PATTERN = /([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*/;
-
-export enum ErrorMessage {
-  InvalidEmail = 'Please enter a valid email',
-  InvalidPassword = 'Please enter a valid password',
-}
-
 export const CONTACTS = {
   address: {
     city: 'Санкт-Петербург,',
@@ -112,8 +99,3 @@ export enum UrlMapMarket {
   Default = 'img/svg/pin-default.svg',
   Current = 'img/svg/pin-active.svg',
 }
-
-// export const DAYS: Record<string, string> = {
-//   'today': 'сегодня',
-//   'tomorrow': 'завтра',
-// };
