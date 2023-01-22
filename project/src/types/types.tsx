@@ -29,21 +29,21 @@ export type QuestLocation = {
   address: string;
   coords: number[];
 };
-export type QuestDate = [{
+export type QuestDate = {
   time: string;
   isAvailable: boolean;
-}];
+};
 
-export type Slots = {
+export type Slot = {
   today: QuestDate[];
   tomorrow :QuestDate[];
 };
 
-export type BookingInfo = [{
+export type BookingInfo = {
   id: number;
   locations: QuestLocation[];
-  slots: Slots;
-}];
+  slots: Slot;
+};
 
 export type BookingData = {
   date: string;
@@ -52,44 +52,26 @@ export type BookingData = {
   phone: string;
   withChildren: boolean;
   peopleCount: number;
+  // id: number;
   locationId: number;
   questId: number;
 };
 
-export type UserBooking = {
-  date: string;
-  id: number;
-  time: string;
-  contactPerson: string;
-  phone: string;
-  withChildren: boolean;
-  peopleCount: number;
-  location: QuestLocation;
-  quest: {
-    id: number;
-    title: string;
-    previewImg: string;
-    level: string;
-    type: string;
-    peopleMinMax: number[];
-  };
-};
-
-// export type Booking = {
+// export type UserBooking = {
+//   date: string;
 //   id: number;
-//   locations: [{
+//   time: string;
+//   contactPerson: string;
+//   phone: string;
+//   withChildren: boolean;
+//   peopleCount: number;
+//   location: QuestLocation;
+//   quest: {
 //     id: number;
-//     address: string;
-//     coords: [number];
-//   }];
-//   slots: {
-//     today: [{
-//       time: string;
-//       isAvailable: boolean;
-//     }];
-//     tomorrow: [{
-//       time: string;
-//       isAvailable: boolean;
-//     }];
+//     title: string;
+//     previewImg: string;
+//     level: string;
+//     type: string;
+//     peopleMinMax: number[];
 //   };
-// }
+// };

@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { AuthData, UserData, Quest, BookingInfo } from '../types/types';
+import { AuthData, UserData, Quest, BookingInfo, BookingData } from '../types/types';
 import { APIRoute, AppRoute } from '../const';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
@@ -49,28 +49,28 @@ export const deleteReservationQuestAction = createAsyncThunk<string, string, {//
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
-export const fetchBookingAction = createAsyncThunk<BookingInfo[], string, { // dai polya dlya zapolneniya pri bronirovanii
+export const fetchBookingAction = createAsyncThunk<BookingInfo, string, { // dai polya dlya zapolneniya pri bronirovanii
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchBooking',
-  async (questId, {extra: api}) => (await api.get<BookingInfo[]>(`${APIRoute.Quests}/${questId}/booking`)).data,
+  async (questId, {extra: api}) => (await api.get<BookingInfo>(`${APIRoute.Quests}/${questId}/booking`)).data,
 );
 // ---------------------------------------------------------------------------------------------------------------------------POST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// export const sendQuestBookedAction = createAsyncThunk<QuestBooked, QuestBooked, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/sendQuestBooked',
-//   async (questBooked, {dispatch, extra: api}) => {
-//     const {data} = await api.post<QuestBooked>(`${APIRoute.Quests}/${questBooked.id}/booking`, questBooked);
-//     dispatch(redirectToRoute(AppRoute.MyQuests));
-//     dispatch(fetchQuestsReservationAction());
-//     return data;
-//   },
-// );
+export const postQuestBookedAction = createAsyncThunk<BookingData, BookingData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/postQuestBooked',
+  async (questBooked, {dispatch, extra: api}) => {
+    const {data} = await api.post<BookingData>(`${APIRoute.Quests}/${questBooked.questId}/booking`, questBooked);
+    dispatch(redirectToRoute(AppRoute.MyReservations));
+    dispatch(fetchReservationQuestsAction());
+    return data;
+  },
+);
 
 // export const postBookingAction = createAsyncThunk<Review, {
 //   userReview: NewReview;

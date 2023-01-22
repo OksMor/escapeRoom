@@ -4,7 +4,7 @@ import { BookingState } from '../../types/state';
 import { NameSpace } from '../../const';
 
 const initialState: BookingState = {
-  booking: [],
+  booking: null,
   isLoading: true
 };
 

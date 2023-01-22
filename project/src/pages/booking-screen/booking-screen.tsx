@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { LeafletMouseEvent } from 'leaflet';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchCurrentQuestAction, fetchBookingAction } from '../../store/api-actions'; //fetchCurrentQuestAction,
+import { fetchCurrentQuestAction, fetchBookingAction } from '../../store/api-actions';
 import { getCurrentQuest } from '../../store/current-quest-process/selector';
 import { getQuestBooking } from '../../store/booking-process/selector';
 import { QuestLocation } from '../../types/types';
@@ -14,7 +14,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FormBooking from '../../components/form-booking/form-booking';
 import Map from '../../components/map/map';
-// import LoadingScreen from '../../components/loading-screen/loading-screen';
+import NotFoundScreen from '../no-found-screen/no-found-screen';
 
 function BookingScreen(): JSX.Element {
 
@@ -23,23 +23,22 @@ function BookingScreen(): JSX.Element {
 
   const quest = useAppSelector(getCurrentQuest);
   const bookingInfo = useAppSelector(getQuestBooking);
-  // const isBookingDataLoading = useAppSelector(getIsBookingDataLoading);
+  // const isBookingInfoLoading = useAppSelector(getIsBookingInfoLoading);
 
-  const bookingLocations: QuestLocation[] = [];
+  const bookingLocations = [] as QuestLocation[];
   let defaultLocation = {} as QuestLocation;
 
 
-  // if (bookingInfo?.locations !== undefined) {
-  //   bookingInfo.locations.forEach((booking) => bookingLocations.push({
-  //     coords[0]: booking.coords[0],
-  //     coords[1]: booking.coords[1],
-  //     locationId: booking.id,
-  //     address: booking.address
-  //   }));
-  //   if (bookingInfo.locations.length > 0) {
-  //     defaultLocation = bookingLocations[0];
-  //   }
-  // }
+  if (bookingInfo?.locations !== undefined) {
+    bookingInfo.locations.forEach((booking) => bookingLocations.push({
+      coords: [booking.coords[0], booking.coords[1]],
+      id: booking.id,
+      address: booking.address
+    }));
+    if (bookingInfo.locations.length > 0) {
+      defaultLocation = bookingLocations[0];
+    }
+  }
 
   const [selectedPoint, setSelectedPoint] = useState(defaultLocation);
 
@@ -55,7 +54,7 @@ function BookingScreen(): JSX.Element {
     dispatch(fetchCurrentQuestAction(String(params.id)));
   }, [dispatch, params.id, selectedPoint]);
 
-  return (
+  return bookingInfo ? (
     <>
       <Helmet>
         <title>EscapeRoom. Contacts</title>
@@ -83,17 +82,17 @@ function BookingScreen(): JSX.Element {
                   onClickFunction = { onMarkerClick }
                 />
               </div>
-              <p className="booking-map__address">Вы&nbsp;выбрали: {Object.keys(selectedPoint).length === 0 ? defaultLocation.address : selectedPoint.address} наб. реки Карповки&nbsp;5, лит&nbsp;П, м. Петроградская{}</p>
+              <p className="booking-map__address">Вы&nbsp;выбрали: { Object.keys(selectedPoint).length === 0 ? defaultLocation.address : selectedPoint.address }</p>
             </div>
           </div>
 
-          <FormBooking />
+          <FormBooking questBooking = { bookingInfo } />
 
         </div>
       </main>
       <Footer/>
     </>
-  );
+  ) : <NotFoundScreen/>;
 }
 
 export default BookingScreen;
