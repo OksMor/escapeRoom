@@ -10,7 +10,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>): Map | null {
 
   useEffect(() => {
     if (map !== null && map !== undefined) {
-      map.setView(new L.LatLng(CONTACTS_LOCATION.lat, CONTACTS_LOCATION.lng));
+      map.setView(new L.LatLng(CONTACTS_LOCATION.coords[0], CONTACTS_LOCATION.coords[1]));
       map.eachLayer((layer) => {
         if (layer instanceof L.Marker){
           layer.remove();
@@ -23,8 +23,8 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>): Map | null {
       if (map === null || map === undefined) {
         const instance = new Map(mapRef.current, {
           center: {
-            lat: CONTACTS_LOCATION.lat,
-            lng: CONTACTS_LOCATION.lng,
+            lat: CONTACTS_LOCATION.coords[0],
+            lng: CONTACTS_LOCATION.coords[1],
           },
           zoom: MAP_ZOOM,
         });

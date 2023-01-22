@@ -25,14 +25,9 @@ export enum NameSpace {
   User = 'USER',
   Quests = 'QUESTS',
   CurrentQuest = 'CURRENTQUEST',
-  Booking = 'BOOKING',
+  BookingQuest = 'BOOKINGQUEST',
   ReservationQuests = 'RESERVATIONSQUESTS',
 }
-
-// export enum ReviewLength {
-//   Min = 50,
-//   Max = 400
-// }
 
 export enum QuestType {
   All = 'all',
@@ -107,8 +102,7 @@ export const CONTACTS = {
 
 export const CONTACTS_LOCATION = {
   address: 'Санкт-Петербург, Набережная реки Карповка, д 5П',
-  lat: 59.968137,
-  lng: 30.316272,
+  coords: [59.968137, 30.316272],
   id: 0,
 };
 

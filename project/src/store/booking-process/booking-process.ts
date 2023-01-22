@@ -4,12 +4,12 @@ import { BookingState } from '../../types/state';
 import { NameSpace } from '../../const';
 
 const initialState: BookingState = {
-  comments: [],
+  booking: [],
   isLoading: true
 };
 
 export const bookingProcess = createSlice({
-  name: NameSpace.Booking,
+  name: NameSpace.BookingQuest,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -18,7 +18,7 @@ export const bookingProcess = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchBookingAction.fulfilled, (state, action) => {
-        state.comments = action.payload;
+        state.booking = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchBookingAction.rejected, (state) => {

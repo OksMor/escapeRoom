@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
 import { AppRoute, LEVEL_QUEST, TYPE_QUEST } from '../../const';
 
-import { fetchCurrentQuestAction, fetchReservationQuestsAction } from '../../store/api-actions';
+import { fetchCurrentQuestAction } from '../../store/api-actions';//, fetchReservationQuestsAction
 import { getCurrentQuest, getIsCurrentQuestLoading } from '../../store/current-quest-process/selector';
 import { getIsAuthorized } from '../../store/user-process/selector';
 
@@ -30,11 +30,11 @@ function QuestScreen(): JSX.Element {
     }
   }, [params.id, dispatch, quest?.id]);
 
-  useEffect(() => {
-    if (isAuthorized) {
-      dispatch(fetchReservationQuestsAction());
-    }
-  }, [dispatch, isAuthorized]);
+  // useEffect(() => {
+  //   if (isAuthorized) {
+  //     dispatch(fetchReservationQuestsAction());
+  //   }
+  // }, [dispatch, isAuthorized]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -56,7 +56,7 @@ function QuestScreen(): JSX.Element {
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
             <source type="image/webp" srcSet={`${String(quest.coverImgWebp)} 2x`}/>
-            <img src={`${quest.coverImg}`} srcSet={`${quest.coverImg} 2x`} width="1366" height="768" alt={quest.title}/>
+            <img src={`${String(quest.coverImg)}`} srcSet={`${String(quest.coverImg)} 2x`} width="1366" height="768" alt={quest.title}/>
           </picture>
         </div>
         <div className="container container--size-l">
@@ -77,7 +77,7 @@ function QuestScreen(): JSX.Element {
               </li>
             </ul>
             <p className="quest-page__description">{quest.description}</p>
-            <Link className="btn btn--accent btn--cta quest-page__btn" to={ isAuthorized ? AppRoute.Booking.replace(':id', `${Number(params.id)}`) : AppRoute.SignIn}>Забронировать</Link>
+            <Link className="btn btn--accent btn--cta quest-page__btn" to={ isAuthorized ? `${AppRoute.Quest}/${String(params.id)}/booking` : AppRoute.SignIn }>Забронировать</Link>
           </div>
         </div>
       </main>

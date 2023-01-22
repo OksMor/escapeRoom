@@ -12,6 +12,6 @@ export const rootReducer = combineReducers({
   [NameSpace.User]: userProcess.reducer,
   [NameSpace.Quests]: questsProcess.reducer,
   [NameSpace.CurrentQuest]: currentQuestProcess.reducer,
-  [NameSpace.Booking]: bookingProcess.reducer,
+  [NameSpace.BookingQuest]: bookingProcess.reducer,
   [NameSpace.ReservationQuests]: reservationQuestsProcess.reducer,
 });

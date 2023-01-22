@@ -1,7 +1,7 @@
-import { Booking } from '../../types/types';
+import { BookingInfo } from './../../types/types';
 import { State } from '../../types/state';
 import { NameSpace } from '../../const';
 
-export const getReviews = (state: State): Booking[] => state[NameSpace.Booking].comments;
+export const getQuestBooking = (state: State) : BookingInfo[] => state[NameSpace.BookingQuest].booking;
 
-export const getIsReviewsLoading = (state: State): boolean => state[NameSpace.Booking].isLoading;
+export const getIsBookingInfoLoading = (state: State): boolean => state[NameSpace.BookingQuest].isLoading;

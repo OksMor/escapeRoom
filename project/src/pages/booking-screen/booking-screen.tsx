@@ -1,15 +1,20 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
+import { LeafletMouseEvent } from 'leaflet';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchCurrentQuestAction } from '../../store/api-actions';
+import { fetchCurrentQuestAction, fetchBookingAction } from '../../store/api-actions'; //fetchCurrentQuestAction,
 import { getCurrentQuest } from '../../store/current-quest-process/selector';
+import { getQuestBooking } from '../../store/booking-process/selector';
+import { QuestLocation } from '../../types/types';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FormBooking from '../../components/form-booking/form-booking';
 import Map from '../../components/map/map';
+// import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function BookingScreen(): JSX.Element {
 
@@ -17,12 +22,38 @@ function BookingScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const quest = useAppSelector(getCurrentQuest);
+  const bookingInfo = useAppSelector(getQuestBooking);
+  // const isBookingDataLoading = useAppSelector(getIsBookingDataLoading);
+
+  const bookingLocations: QuestLocation[] = [];
+  let defaultLocation = {} as QuestLocation;
+
+
+  // if (bookingInfo?.locations !== undefined) {
+  //   bookingInfo.locations.forEach((booking) => bookingLocations.push({
+  //     coords[0]: booking.coords[0],
+  //     coords[1]: booking.coords[1],
+  //     locationId: booking.id,
+  //     address: booking.address
+  //   }));
+  //   if (bookingInfo.locations.length > 0) {
+  //     defaultLocation = bookingLocations[0];
+  //   }
+  // }
+
+  const [selectedPoint, setSelectedPoint] = useState(defaultLocation);
+
+  const onMarkerClick = (e: LeafletMouseEvent) => {
+    const clickedLocation = bookingLocations.find((loc) => loc.coords[0] === e.latlng.lat && loc.coords[1] === e.latlng.lng);
+    if (clickedLocation) {
+      setSelectedPoint(clickedLocation);
+    }
+  };
 
   useEffect(() => {
-    if (params.id && quest?.id.toString() !== params.id) {
-      dispatch(fetchCurrentQuestAction(params.id));
-    }
-  }, [params.id, dispatch, quest?.id]);
+    dispatch(fetchBookingAction(String(params.id)));
+    dispatch(fetchCurrentQuestAction(String(params.id)));
+  }, [dispatch, params.id, selectedPoint]);
 
   return (
     <>
@@ -41,22 +72,22 @@ function BookingScreen(): JSX.Element {
           <div className="page-content__title-wrapper">
             <h1 className="subtitle subtitle--size-l page-content__subtitle">Бронирование квеста
             </h1>
-            <p className="title title--size-m title--uppercase page-content__title">Маньяк</p>
+            <p className="title title--size-m title--uppercase page-content__title">{quest?.title}</p>
           </div>
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
                 <Map
-                  locations = {locations}
-                  selectedPoint = {{} as MarkerLocation}
-                  onClickFunction = { () => void {} }
+                  locations = { bookingLocations }
+                  selectedPoint = { Object.keys(selectedPoint).length === 0 ? defaultLocation : selectedPoint }
+                  onClickFunction = { onMarkerClick }
                 />
               </div>
-              <p className="booking-map__address">Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м. Петроградская</p>
+              <p className="booking-map__address">Вы&nbsp;выбрали: {Object.keys(selectedPoint).length === 0 ? defaultLocation.address : selectedPoint.address} наб. реки Карповки&nbsp;5, лит&nbsp;П, м. Петроградская{}</p>
             </div>
           </div>
 
-          <FormBooking/>
+          <FormBooking />
 
         </div>
       </main>

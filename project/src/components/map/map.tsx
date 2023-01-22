@@ -4,11 +4,11 @@ import useMap from '../../hooks/useMap';
 import { Icon, Marker, LeafletMouseEvent } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { UrlMapMarket } from '../../const';
-import { MarkerLocation } from '../../types/types';
+import { QuestLocation } from '../../types/types';
 
 type MapProps = {
-  locations: MarkerLocation[];
-  selectedPoint: MarkerLocation | undefined;
+  locations: QuestLocation[];
+  selectedPoint: QuestLocation | undefined;
   onClickFunction: (e: LeafletMouseEvent) => void;
 };
 
@@ -32,13 +32,13 @@ function Map ({ locations, selectedPoint, onClickFunction } : MapProps): JSX.Ele
     if (map) {
       locations.forEach((location) => {
         const marker = new Marker ({
-          lat: location.lat,
-          lng: location.lng,
+          lat: location.coords[0],
+          lng: location.coords[1],
         });
 
         marker
           .setIcon(
-            selectedPoint !== undefined && location.lat === selectedPoint.lat && location.lng === selectedPoint.lng
+            selectedPoint !== undefined && location.coords[0] === selectedPoint.coords[0] && location.coords[1] === selectedPoint.coords[1]
               ? currentCustomIcon
               : defaultCustomIcon
           ).on('click', onClickFunction)

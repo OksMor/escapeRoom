@@ -1,4 +1,58 @@
-function FormBooking(): JSX.Element {
+// import { useEffect, useState } from 'react';
+
+// import { useAppDispatch } from '../../hooks/hooks';
+
+// import { fetchBookingAction, fetchCurrentQuestAction } from '../../store/api-actions';
+
+// import { BookingInfo } from '../../types/types';
+
+// type FormBookingProps = {
+//   questBooking: BookingInfo[];
+// }
+
+function FormBooking(): JSX.Element { //props: FormBookingProps
+
+  // const { questBooking } = props;
+
+  // const [ formData, setFormData ] = useState(
+  //   date: '',
+  //   time: '',
+  //   contactPerson: '',
+  //   phone: '',
+  //   withChildren: false,
+  //   peopleCount: 0,
+  // );
+
+  // const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   if (questBooking.id) {
+  //     dispatch(fetchCurrentQuestAction(questBooking.id));
+  //     dispatch(fetchBookingAction(questBooking.id));
+  //   }
+  // }, [questBooking.id, dispatch]);
+
+  // const onSubmit = (data: BookingData) => {
+
+  //   const slotTime = data.time.split(' ');
+
+  //   if (id) {
+  //     dispatch(sendQuestBookedAction({
+  //       id: Number(id),
+  //       date: slotTime[0],
+  //       time: slotTime[1],
+  //       contactPerson: data.name,
+  //       phone: data.tel,
+  //       withChildren: data.children,
+  //       peopleCount: Number(data.person),
+  //       locationId: 1,
+  //       questId: Number(id),
+  //     }
+  //     ));
+  //   }
+  // };
+  //onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}
+
   return (
     <form className="booking-form" action="https://echo.htmlacademy.ru/" method="post">
       <fieldset className="booking-form__section">
@@ -7,11 +61,12 @@ function FormBooking(): JSX.Element {
         <fieldset className="booking-form__date-section">
           <legend className="booking-form__date-title">Сегодня</legend>
           <div className="booking-form__date-inner-wrapper">
+
             <label className="custom-radio booking-form__date">
               <input type="radio" id="today9h45m" name="date" value="today9h45m" required/><span className="custom-radio__label">9:45</span>
             </label>
             <label className="custom-radio booking-form__date">
-              <input type="radio" id="today15h00m" name="date" checked value="today15h00m" required/><span className="custom-radio__label">15:00</span>
+              <input type="radio" id="today15h00m" name="date" value="today15h00m" required/><span className="custom-radio__label">15:00</span>
             </label>
             <label className="custom-radio booking-form__date">
               <input type="radio" id="today17h30m" name="date" value="today17h30m" required/><span className="custom-radio__label">17:30</span>
@@ -63,7 +118,7 @@ function FormBooking(): JSX.Element {
           <input type="number" id="person" name="person" placeholder="Количество участников" required/>
         </div>
         <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
-          <input type="checkbox" id="children" name="children" checked/>
+          <input type="checkbox" id="children" name="children" />
           <span className="custom-checkbox__icon">
             <svg width="20" height="17" aria-hidden="true">
               <use xlinkHref="#icon-tick"></use>

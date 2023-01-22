@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 import { CONTACTS, CONTACTS_LOCATION } from '../../const';
-import { MarkerLocation } from '../../types/types';
+import { QuestLocation } from '../../types/types';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
@@ -9,7 +9,7 @@ import Map from '../../components/map/map';
 
 function ContactsScreen(): JSX.Element {
 
-  const locations: MarkerLocation[] = [CONTACTS_LOCATION];
+  const locations: QuestLocation[] = [CONTACTS_LOCATION];
 
   return (
     <>
@@ -61,7 +61,7 @@ function ContactsScreen(): JSX.Element {
               <div className="map">
                 <Map
                   locations = {locations}
-                  selectedPoint = {{} as MarkerLocation}
+                  selectedPoint = {CONTACTS_LOCATION}
                   onClickFunction = { () => void {} }
                 />
               </div>

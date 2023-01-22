@@ -1,13 +1,13 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { AuthData, UserData, Quest, Booking } from '../types/types';
+import { AuthData, UserData, Quest, BookingInfo } from '../types/types';
 import { APIRoute, AppRoute } from '../const';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 // import { toast } from 'react-toastify';
 
-export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, {
+export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, { // vse kvesti
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -16,7 +16,7 @@ export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, {
   async (_arg, {extra: api}) => (await api.get<Quest[]>(APIRoute.Quests)).data,
 );
 
-export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, {
+export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, { // odin kvest
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -25,7 +25,7 @@ export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, {
   async (questId, {extra: api}) => (await api.get<Quest>(`${APIRoute.Quests}/${questId}`)).data,
 );
 
-export const fetchReservationQuestsAction = createAsyncThunk<Quest[], undefined, {
+export const fetchReservationQuestsAction = createAsyncThunk<Quest[], undefined, { // moi bronirovaniya
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -33,16 +33,44 @@ export const fetchReservationQuestsAction = createAsyncThunk<Quest[], undefined,
   'data/fetchReservationQuests',
   async (_arg, {extra: api}) => (await api.get<Quest[]>(APIRoute.Reservations)).data,
 );
+
+export const deleteReservationQuestAction = createAsyncThunk<string, string, {// ---------------------- ydalenie bronirovaniya !!!!!!!!!!!!!!!!!!!!!!!!!!!
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/deleteQuestReservation',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.delete<string>(`${APIRoute.Reservations}/${id}`);
+    // dispatch(fetchQuestsReservationAction());
+    return data;
+  },
+);
+
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
-export const fetchBookingAction = createAsyncThunk<Booking[], string, {
+export const fetchBookingAction = createAsyncThunk<BookingInfo[], string, { // dai polya dlya zapolneniya pri bronirovanii
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchBooking',
-  async (filmId, {extra: api}) => (await api.get<Booking[]>(`${APIRoute.Reservations}/${filmId}`)).data,
+  async (questId, {extra: api}) => (await api.get<BookingInfo[]>(`${APIRoute.Quests}/${questId}/booking`)).data,
 );
+// ---------------------------------------------------------------------------------------------------------------------------POST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// export const sendQuestBookedAction = createAsyncThunk<QuestBooked, QuestBooked, {
+//   dispatch: AppDispatch;
+//   state: State;
+//   extra: AxiosInstance;
+// }>(
+//   'data/sendQuestBooked',
+//   async (questBooked, {dispatch, extra: api}) => {
+//     const {data} = await api.post<QuestBooked>(`${APIRoute.Quests}/${questBooked.id}/booking`, questBooked);
+//     dispatch(redirectToRoute(AppRoute.MyQuests));
+//     dispatch(fetchQuestsReservationAction());
+//     return data;
+//   },
+// );
 
 // export const postBookingAction = createAsyncThunk<Review, {
 //   userReview: NewReview;
@@ -79,6 +107,9 @@ export const fetchBookingAction = createAsyncThunk<Booking[], string, {
 //     dispatch(fetchReservationQuestsAction());
 //   },
 // );
+
+// ------------------------------------------------------------------------------------
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;
