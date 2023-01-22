@@ -11,7 +11,7 @@ function QuestsList(props: QuestsListProps): JSX.Element {
 
   return (
     <div className="cards-grid">
-      {quests.map((quest) => <QuestCard key={quest.id} quest={quest} />)}
+      {quests.map((quest) => <QuestCard key={quest.id} quest={quest}/>)}
     </div>
   );
 }

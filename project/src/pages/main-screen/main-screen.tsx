@@ -2,16 +2,13 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { AuthorizationStatus } from '../../const';
 
-import { fetchQuestsAction, fetchReservationQuestsAction } from '../../store/api-actions';
+import { fetchQuestsAction } from '../../store/api-actions';
 import { getIsQuestsLoading } from '../../store/quests-process/selector';
-import { getAuthorizationStatus } from '../../store/user-process/selector';
 import { getFilterQuests } from '../../store/app-process/selector';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 import QuestsList from '../../components/quests-list/quests-list';
@@ -22,17 +19,11 @@ function MainScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
   const quests = useAppSelector(getFilterQuests);
   const isQuestsLoading = useAppSelector(getIsQuestsLoading);
 
-
   useEffect(() => {
     dispatch(fetchQuestsAction());
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchReservationQuestsAction());
-    }
   }, [dispatch]);
 
   return (

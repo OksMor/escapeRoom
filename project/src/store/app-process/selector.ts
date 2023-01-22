@@ -9,25 +9,6 @@ export const getCurrentLevel = (state: State): string => state[NameSpace.App].cu
 
 export const getCurrentType = (state: State): string => state[NameSpace.App].currentType;
 
-// export const getFilteredQuests = createSelector(
-//   [getQuests, getCurrentLevel, getCurrentType],
-//   (quests, levelQuest, typeQuest) => {
-
-//     if (levelQuest === QuestLevel.Any) {
-//       if (typeQuest === QuestType.All) {
-//         return quests;
-//       }
-//       return quests.filter((quest) => quest.type === typeQuest);
-//     } else {
-//       if (typeQuest === QuestType.All) {
-//         return quests.filter((quest) => quest.level === levelQuest);
-//       }
-//       return quests.filter((quest) => quest.type === typeQuest && quest.level === levelQuest);
-//     }
-
-//   }
-// );
-
 const getFilterGenreQuests = createSelector(
   [getQuests, getCurrentType],
   (quests: Quest[], filterType: string) => {

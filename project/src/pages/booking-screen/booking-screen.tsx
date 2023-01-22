@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -12,12 +11,12 @@ import { fetchCurrentQuestAction, fetchBookingAction } from '../../store/api-act
 import { getCurrentQuest } from '../../store/current-quest-process/selector';
 import { getQuestBooking } from '../../store/booking-process/selector';
 
+import NotFoundScreen from '../no-found-screen/no-found-screen';
+
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FormBooking from '../../components/form-booking/form-booking';
 import Map from '../../components/map/map';
-
-import NotFoundScreen from '../no-found-screen/no-found-screen';
 
 function BookingScreen(): JSX.Element {
 
@@ -26,7 +25,6 @@ function BookingScreen(): JSX.Element {
 
   const quest = useAppSelector(getCurrentQuest);
   const bookingInfo = useAppSelector(getQuestBooking);
-  // const isBookingInfoLoading = useAppSelector(getIsBookingInfoLoading);
 
   const bookingLocations = [] as QuestLocation[];
   let defaultLocation = {} as QuestLocation;

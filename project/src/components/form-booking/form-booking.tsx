@@ -43,7 +43,6 @@ function FormBooking(props: FormBookingProps): JSX.Element {
 
     if (params.id) {
       dispatch(postQuestBookedAction({
-        // id: Number(params.id),
         date: slotTime[0],
         time: slotTime[1],
         contactPerson: data.name,
@@ -59,7 +58,7 @@ function FormBooking(props: FormBookingProps): JSX.Element {
 
   const checkPersonValidate = (person: number) => {
     if (quest) {
-      if (person > quest.peopleMinMax[0] && person < quest.peopleMinMax[1]) {
+      if (person >= quest.peopleMinMax[0] && person <= quest.peopleMinMax[1]) {
         return true;
       } else {
         return false;

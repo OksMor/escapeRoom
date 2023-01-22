@@ -52,26 +52,18 @@ export type BookingData = {
   phone: string;
   withChildren: boolean;
   peopleCount: number;
-  // id: number;
   locationId: number;
   questId: number;
 };
 
-// export type UserBooking = {
-//   date: string;
-//   id: number;
-//   time: string;
-//   contactPerson: string;
-//   phone: string;
-//   withChildren: boolean;
-//   peopleCount: number;
-//   location: QuestLocation;
-//   quest: {
-//     id: number;
-//     title: string;
-//     previewImg: string;
-//     level: string;
-//     type: string;
-//     peopleMinMax: number[];
-//   };
-// };
+export type UserBooking = {
+  date: string;
+  time: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  id: number;
+  location: QuestLocation;
+  quest: Quest;
+};

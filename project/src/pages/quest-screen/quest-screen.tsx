@@ -1,19 +1,19 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-
 import { AppRoute, LEVEL_QUEST, TYPE_QUEST } from '../../const';
 
-import { fetchCurrentQuestAction } from '../../store/api-actions';//, fetchReservationQuestsAction
+import { fetchCurrentQuestAction } from '../../store/api-actions';
 import { getCurrentQuest, getIsCurrentQuestLoading } from '../../store/current-quest-process/selector';
 import { getIsAuthorized } from '../../store/user-process/selector';
+
+import NotFoundScreen from '../no-found-screen/no-found-screen';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import NotFoundScreen from '../no-found-screen/no-found-screen';
 
 function QuestScreen(): JSX.Element {
 
@@ -29,16 +29,6 @@ function QuestScreen(): JSX.Element {
       dispatch(fetchCurrentQuestAction(params.id));
     }
   }, [params.id, dispatch, quest?.id]);
-
-  // useEffect(() => {
-  //   if (isAuthorized) {
-  //     dispatch(fetchReservationQuestsAction());
-  //   }
-  // }, [dispatch, isAuthorized]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [params.id]);
 
   if (isCurrentQuestLoading && quest?.id.toString() !== params.id) {
     return <LoadingScreen />;

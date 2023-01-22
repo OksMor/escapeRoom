@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'; //, useNavigate
+import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutAction } from '../../store/api-actions';
@@ -6,12 +6,10 @@ import { getIsAuthorized, } from '../../store/user-process/selector';
 
 function Header(): JSX.Element {
 
-  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
 
   const isAuthorized = useAppSelector(getIsAuthorized);
-  // const authorizedUser = useAppSelector(getAuthorizedUser);
 
   const getUserBlock = () => {
     if (isAuthorized) {

@@ -1,4 +1,4 @@
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Quest } from '../../types/types';
 import { AppRoute, LEVEL_QUEST } from '../../const';
@@ -11,7 +11,6 @@ function QuestCard(props: QuestCardProps): JSX.Element {
   const { quest } = props;
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <div className="quest-card" onClick={() => navigate(`${AppRoute.Quest}/${quest.id}`)}>
@@ -26,8 +25,6 @@ function QuestCard(props: QuestCardProps): JSX.Element {
         <div className="quest-card__info-wrapper">
           <Link className="quest-card__link" to={`${AppRoute.Quest}/${quest.id}`}>{quest.title}</Link>
         </div>
-        {/* <div class="quest-card__info-wrapper"><a class="quest-card__link" href="quest.html">Маньяк</a><span class="quest-card__info">[сегодня,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br>м. Петроградская]</span> */}
-
         <ul className="tags quest-card__tags">
           <li className="tags__item">
             <svg width="11" height="14" aria-hidden="true">
@@ -40,7 +37,6 @@ function QuestCard(props: QuestCardProps): JSX.Element {
             </svg>{LEVEL_QUEST[quest.level]}
           </li>
         </ul>
-        {(location.pathname === AppRoute.Root) ? '' : <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>}
       </div>
     </div>
   );

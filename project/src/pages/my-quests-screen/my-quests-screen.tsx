@@ -4,16 +4,14 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import QuestsList from '../../components/quests-list/quests-list';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
+import QuestCardReservation from '../../components/quest-card-reservation/quest-card-reservation';
 
-import { getReservationQuests, getIsReservationQuestsLoading } from '../../store/reservation-quests-process/selector';
+import { getReservationQuests } from '../../store/reservation-quests-process/selector';
 import { fetchReservationQuestsAction } from '../../store/api-actions';
 
 function MyQuestsScreen(): JSX.Element {
 
-  const myQuests = useAppSelector(getReservationQuests);
-  const isQuestsLoading = useAppSelector(getIsReservationQuestsLoading);
+  const userQuests = useAppSelector(getReservationQuests);
 
   const dispatch = useAppDispatch();
 
@@ -41,7 +39,10 @@ function MyQuestsScreen(): JSX.Element {
           <div className="page-content__title-wrapper">
             <h1 className="title title--size-m page-content__title">Мои бронирования</h1>
           </div>
-          {isQuestsLoading ? <LoadingScreen/> : <QuestsList quests={myQuests} />}
+          <div className="cards-grid">
+            {userQuests.map((quest) => <QuestCardReservation key={quest.id} quest={quest}/>)}
+          </div>
+
         </div>
       </main>
 

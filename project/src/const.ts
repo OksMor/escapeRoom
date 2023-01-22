@@ -75,6 +75,11 @@ export const TYPE_QUEST: Record<string, string> = {
   'sci-fi': 'sci-fi',
 };
 
+export const DATE_QUEST: Record<string, string> = {
+  'today': 'сегодня',
+  'tomorrow': 'завтра',
+};
+
 export const CONTACTS = {
   address: {
     city: 'Санкт-Петербург,',

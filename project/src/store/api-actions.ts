@@ -1,13 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { AuthData, UserData, Quest, BookingInfo, BookingData } from '../types/types';
+import { AuthData, UserData, Quest, BookingInfo, BookingData, UserBooking } from '../types/types';
 import { APIRoute, AppRoute } from '../const';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
-// import { toast } from 'react-toastify';
 
-export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, { // vse kvesti
+export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -16,7 +15,7 @@ export const fetchQuestsAction = createAsyncThunk<Quest[], undefined, { // vse k
   async (_arg, {extra: api}) => (await api.get<Quest[]>(APIRoute.Quests)).data,
 );
 
-export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, { // odin kvest
+export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -25,16 +24,16 @@ export const fetchCurrentQuestAction = createAsyncThunk<Quest, string, { // odin
   async (questId, {extra: api}) => (await api.get<Quest>(`${APIRoute.Quests}/${questId}`)).data,
 );
 
-export const fetchReservationQuestsAction = createAsyncThunk<Quest[], undefined, { // moi bronirovaniya
+export const fetchReservationQuestsAction = createAsyncThunk<UserBooking[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchReservationQuests',
-  async (_arg, {extra: api}) => (await api.get<Quest[]>(APIRoute.Reservations)).data,
+  async (_arg, {extra: api}) => (await api.get<UserBooking[]>(APIRoute.Reservations)).data,
 );
 
-export const deleteReservationQuestAction = createAsyncThunk<string, string, {// ---------------------- ydalenie bronirovaniya !!!!!!!!!!!!!!!!!!!!!!!!!!!
+export const deleteReservationQuestAction = createAsyncThunk<string, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -42,14 +41,12 @@ export const deleteReservationQuestAction = createAsyncThunk<string, string, {//
   'data/deleteQuestReservation',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.delete<string>(`${APIRoute.Reservations}/${id}`);
-    // dispatch(fetchQuestsReservationAction());
+    dispatch(fetchReservationQuestsAction());
     return data;
   },
 );
 
-//-----------------------------------------------------------------------------------------------------------------------------------------
-
-export const fetchBookingAction = createAsyncThunk<BookingInfo, string, { // dai polya dlya zapolneniya pri bronirovanii
+export const fetchBookingAction = createAsyncThunk<BookingInfo, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -57,7 +54,7 @@ export const fetchBookingAction = createAsyncThunk<BookingInfo, string, { // dai
   'data/fetchBooking',
   async (questId, {extra: api}) => (await api.get<BookingInfo>(`${APIRoute.Quests}/${questId}/booking`)).data,
 );
-// ---------------------------------------------------------------------------------------------------------------------------POST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 export const postQuestBookedAction = createAsyncThunk<BookingData, BookingData, {
   dispatch: AppDispatch;
   state: State;
@@ -71,44 +68,6 @@ export const postQuestBookedAction = createAsyncThunk<BookingData, BookingData, 
     return data;
   },
 );
-
-// export const postBookingAction = createAsyncThunk<Review, {
-//   userReview: NewReview;
-//   setFormSubmitStateCb: React.Dispatch<React.SetStateAction<boolean>>;
-//   activeId: number;
-//   }, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'user/postNewReview',
-//   async (formData, {dispatch, extra: api}) => {
-//     try {
-//       const newReview: Review = (await api.post<Review>(`${APIRoute.Review}/${formData.activeId}`, formData.userReview)).data;
-//       formData.setFormSubmitStateCb(false);
-//       dispatch(redirectToRoute(`${AppRoute.Film}/${formData.activeId}`));
-//       return newReview;
-//     } catch (err) {
-//       toast.error('something went wrong please try again later...');
-//       formData.setFormSubmitStateCb(true);
-//       throw err;
-//     }
-//   }
-// );
-
-// export const postReservationStatusAction = createAsyncThunk<void, [number, boolean], {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/postReservationStatus',
-//   async ([id, status], { dispatch, extra: api}) => {
-//     await api.post<Quest>(`${APIRoute.Reservations}/${id}/${Number(status)}`);
-//     dispatch(fetchReservationQuestsAction());
-//   },
-// );
-
-// ------------------------------------------------------------------------------------
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
