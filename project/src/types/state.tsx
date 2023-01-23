@@ -19,6 +19,7 @@ export type AppState = {
 export type QuestsState = {
   quests: Quest[];
   isLoading: boolean;
+  hasError: boolean;
 };
 
 export type CurrentQuestState = {

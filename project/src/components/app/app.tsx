@@ -8,6 +8,7 @@ import browserHistory from '../../browser-history';
 import { useAppSelector } from '../../hooks/hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
+import { getErrorStatus } from '../../store/quests-process/selector';
 
 import MainScreen from '../../pages/main-screen/main-screen';
 import QuestScreen from '../../pages/quest-screen/quest-screen';
@@ -17,16 +18,24 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import BookingScreen from '../../pages/booking-screen/booking-screen';
 
 import NotFoundScreen from '../../pages/no-found-screen/no-found-screen';
+import ErrorScreen from '../../pages/error-screen/error-screen';
 
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const hasError = useAppSelector(getErrorStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (hasError) {
+    return (
+      <ErrorScreen />
     );
   }
 
