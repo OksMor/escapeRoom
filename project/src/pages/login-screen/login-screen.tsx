@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, AppRoute } from '../../const';
 
 import { loginAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selector';
@@ -40,6 +40,7 @@ function LoginScreen(): JSX.Element {
       password: data.password,
     }
     ));
+    navigate(-1);
   };
 
   return (

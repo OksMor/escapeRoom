@@ -101,6 +101,6 @@ export const CONTACTS_LOCATION = {
 export const MAP_ZOOM = 10;
 
 export enum UrlMapMarket {
-  Default = 'img/svg/pin-default.svg',
-  Current = 'img/svg/pin-active.svg',
+  Default = '/img/svg/pin-default.svg',
+  Current = '/img/svg/pin-active.svg',
 }

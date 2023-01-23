@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import PrivateRoute from '../private-route/private-route';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRoute from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 import { useAppSelector } from '../../hooks/hooks';
@@ -32,7 +32,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
+      <HistoryRoute history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Root}
@@ -71,7 +71,7 @@ function App(): JSX.Element {
             element={<NotFoundScreen />}
           />
         </Routes>
-      </HistoryRouter>
+      </HistoryRoute>
     </HelmetProvider>
   );
 }

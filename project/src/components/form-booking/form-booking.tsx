@@ -56,16 +56,6 @@ function FormBooking(props: FormBookingProps): JSX.Element {
     }
   };
 
-  const checkPersonValidate = (person: number) => {
-    if (quest) {
-      if (person >= quest.peopleMinMax[0] && person <= quest.peopleMinMax[1]) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
-
   return (
     <form className="booking-form" action="https://echo.htmlacademy.ru/" method="post" onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}>
       <fieldset className="booking-form__section">
@@ -101,7 +91,7 @@ function FormBooking(props: FormBookingProps): JSX.Element {
         <legend className="visually-hidden">Контактная информация</legend>
         <div className="custom-input booking-form__input">
           <label className="custom-input__label" htmlFor="name">Ваше имя</label>
-          <input type="text" id="name" placeholder="Имя" {...register('name', { required: true, pattern: /^[A-Za-zА-Яа-яЁё]{1,15}$/ })} aria-invalid={errors.name ? 'true' : 'false'}/>
+          <input type="text" id="name" placeholder="Имя" {...register('name', { required: true, pattern: /^[A-Za-zА-Яа-яЁё]{0,15}$/ })} aria-invalid={errors.name ? 'true' : 'false'}/>
           {errors.name?.type === 'required' && <><br/><span role="alert">Укажите Ваше имя</span></>}
           {errors.name?.type === 'pattern' && <><br/><span role="alert">Имя должно содержать от 1 до 15 символов</span></>}
         </div>
@@ -113,9 +103,10 @@ function FormBooking(props: FormBookingProps): JSX.Element {
         </div>
         <div className="custom-input booking-form__input">
           <label className="custom-input__label" htmlFor="person">Количество участников</label>
-          <input type="number" id="person" placeholder="Количество участников" {...register('person', { required: true, validate: { checkPersonValidate } })} aria-invalid={errors.person ? 'true' : 'false'}/>
+          <input type="number" id="person" placeholder="Количество участников" {...register('person', { required: true, min : quest?.peopleMinMax[0], max : quest?.peopleMinMax[1] })} aria-invalid={errors.person ? 'true' : 'false'}/>
           {errors.person?.type === 'required' && <><br/><span role="alert">Введите количество участников</span></>}
-          {errors.person?.type === 'validate' && <><br/><span role="alert">Количество участников должно совпадать с описанием в квесте</span></>}
+          {errors.person?.type === 'min' && <><br/><span role="alert">Количество участников должно быть в диапазоне от {quest?.peopleMinMax[0]} до {quest?.peopleMinMax[1]}</span></>}
+          {errors.person?.type === 'max' && <><br/><span role="alert">Количество участников должно быть в диапазоне от {quest?.peopleMinMax[0]} до {quest?.peopleMinMax[1]}</span></>}
         </div>
         <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
           <input type="checkbox" id="children" {...register('children')} />
